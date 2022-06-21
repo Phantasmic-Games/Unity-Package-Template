@@ -17,9 +17,10 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Rename Assembly Definition Files
+        env:
+         REPO_NAME: ${{ github.event.repository.name }}
         run: |
-         REPONAME = '${{ github.event.repository.name }}'
-         echo REPONAME
+         echo REPO_NAME
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
