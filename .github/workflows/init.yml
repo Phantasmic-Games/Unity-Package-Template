@@ -18,9 +18,8 @@ jobs:
       
       - name: Rename Assembly Definition Files
         run: |
-         echo Repository name: 
-         echo '${{ github.event.repository.name }}'
-         which bash
+         REPONAME = '${{ github.event.repository.name }}'
+         echo REPONAME
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
