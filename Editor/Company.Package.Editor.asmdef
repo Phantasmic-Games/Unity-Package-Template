@@ -1,0 +1,18 @@
+{
+    "name": "Company.Package.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:731f7a63fe16c4979947141b2ef3d74f"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
