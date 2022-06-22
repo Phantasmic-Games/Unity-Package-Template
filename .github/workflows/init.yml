@@ -31,6 +31,9 @@ jobs:
           STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo "$STEPS_CONTEXT" 
       
+      - name: Echo Files
+        run: ls
+      
       - name: Edit package.json
         env:
          PACKAGE_NAME : ${{ github.event.repository.name }}
