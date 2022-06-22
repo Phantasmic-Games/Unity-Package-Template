@@ -17,16 +17,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Json Package Before Change
-        run: cat package.json
-      
       - name: Edit package.json
         env:
          PACKAGE_NAME : ${{ github.event.repository.name }}
         run: sed -i "s/Package/$PACKAGE_NAME/" package.json
          
-      - name: Json Package After Change
-        run: cat package.json
+      - name: Verify Changed Files
+        uses: tj-actions/verify-changed-files@v9.2
+        id: verify-changed-files
+        with:
+         files: |
+          *.json
+      
+      - name: Run step only when files change.
+        if: steps.verify-changed-files.outputs.files_changed == 'true'
+        run: |
+          echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
          
       - name: Git Commit/Push Changes
         uses: github-actions-x/commit@v2.9
