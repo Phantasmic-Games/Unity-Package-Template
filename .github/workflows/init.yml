@@ -15,21 +15,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      
-      - name: Dump Github Context
-        env:
-         GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-        
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT" 
+      - uses: actions/checkout@v3
       
       - name: Json Package Before Change
         run: cat package.json
@@ -37,7 +23,7 @@ jobs:
       - name: Edit package.json
         env:
          PACKAGE_NAME : ${{ github.event.repository.name }}
-        run: sed -i 's/Package/$PACKAGE_NAME/' package.json
+        run: sed -i "s/Package/$PACKAGE_NAME/" package.json
          
       - name: Json Package After Change
         run: cat package.json
