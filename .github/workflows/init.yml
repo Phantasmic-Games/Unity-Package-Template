@@ -18,10 +18,10 @@ jobs:
       
       - name: Edit package.json
         env:
-         ORGANIZATION_NAME : ${{ github.repository_owner }} | tr '-' ''
-         PACKAGE_NAME : ${{ (github.event.repository.name | tr '-' '') }}
+         ORGANIZATION_NAME : ${{ github.repository_owner }}
+         PACKAGE_NAME : ${{ (github.event.repository.name | tr '-' '') }}         
          
-         DISPLAY_NAME : ${{ $(github.event.repository.name | tr '-' ' ' }}
+         DISPLAY_NAME : ${{ github.event.repository.name }}
          
          NAME : com.${ORGANIZATION_NAME}.${PACKAGE_NAME} | tr '[:upper:]' '[:lower:]'
         run: |
