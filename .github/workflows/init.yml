@@ -34,4 +34,4 @@ jobs:
          commit-message: 'Initialize'
          force-add: 'true'
          force-push: 'true'
-         files: pacakge.json
+         files: package.json
