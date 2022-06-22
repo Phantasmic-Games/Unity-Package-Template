@@ -33,11 +33,16 @@ jobs:
         if: steps.verify-changed-files.outputs.files_changed == 'true'
         run: |
           echo "Changed files: ${{ steps.verify-changed-files.outputs.changed_files }}"
-         
-      - name: Git Commit/Push Changes
-        uses: github-actions-x/commit@v2.9
+      
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
         with:
-         commit-message: 'Initialize'
-         force-add: 'true'
-         force-push: 'true'
-         files: package.json
+          default_author: github_actions
+     
+      #- name: Git Commit/Push Changes
+      #  uses: github-actions-x/commit@v2.9
+      #  with:
+      #   commit-message: 'Initialize'
+      #   force-add: 'true'
+      #   force-push: 'true'
+      #   files: package.json
