@@ -39,5 +39,5 @@ jobs:
       - name: Git Commit/Push Changes
         uses: github-actions-x/commit@v2.9
         with:
-         commit-mesage: 'Initialize'
+         commit-message: 'Initialize'
          force-add: 'true'
