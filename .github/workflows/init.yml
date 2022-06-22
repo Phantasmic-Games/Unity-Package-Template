@@ -31,13 +31,16 @@ jobs:
           STEPS_CONTEXT: ${{ toJson(steps) }}
         run: echo "$STEPS_CONTEXT" 
       
-      - name: Echo Files
-        run: ls
+      - name: Json Package Before Change
+        run: cat package.json
       
       - name: Edit package.json
         env:
          PACKAGE_NAME : ${{ github.event.repository.name }}
         run: sed -i 's/Package/$PACKAGE_NAME/' package.json
+         
+      - name: Json Package After Change
+        run: cat package.json
          
       - name: Git Commit/Push Changes
         uses: github-actions-x/commit@v2.9
