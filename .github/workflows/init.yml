@@ -19,10 +19,7 @@ jobs:
       - name: Edit package.json
         env:
          PACKAGE_NAME : ${{ github.event.repository.name }}
-         #COMPANY_NAME : ${{ github.repository_owner }}
-        run: |
-         sed -i 's/Package/$PACKAGE_NAME/' package.json
-        #sed -i 's/organization/$COMPANY_NAME/' package.json
+        run: sed -i 's/Package/$PACKAGE_NAME/' package.json
          
       - name: Push to remote
         run: |
@@ -31,9 +28,3 @@ jobs:
          git add -A
          git commit -m "Initialized"
          git push
-      
-      #- name: Rename Assembly Definition Files
-      #  env:
-      #   REPO_NAME: ${{ github.event.repository.name }}
-      #  run: |
-      #   echo $REPO_NAME
