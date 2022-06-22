@@ -5,6 +5,7 @@ name: Initialize
 # Controls when the workflow will run
 on:
     create:
+    workflow_dispatch:
 
 jobs:
   Init:
