@@ -21,9 +21,9 @@ jobs:
          PACKAGE_NAME : ${{ github.event.repository.name }} | tr '-' ' '
         run: sed -i "s/Package/$PACKAGE_NAME/" package.json
         
-      - name: Rename Asemdefs
-        run: |
-         mv Runtime/Company.Package.asmdef
+      #- name: Rename Asemdefs
+      # run: |
+      #  mv Runtime/Company.Package.asmdef
          
       - name: Print All Files
         run: |
