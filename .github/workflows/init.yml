@@ -37,4 +37,4 @@ jobs:
         run: sed -i 's/Package/$PACKAGE_NAME/' package.json
          
       - name: Git Commit/Push Changes
-        uses: actions-x/commit@v1
+        uses: actions-x/commit@v2.9
