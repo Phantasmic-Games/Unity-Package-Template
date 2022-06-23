@@ -35,10 +35,10 @@ jobs:
       
       - name: Print Envs
         run: |
-         echo "${{ env.ORGANIZATION_NAME }}"
-         echo "${{ env.PACKAGE_NAME }}"
-         echo "${{ env.FULL_NAME }}"
-         echo "${{ env.DISPLAY_NAME }}"
+         echo $ORGANIZATION_NAME
+         echo $PACKAGE_NAME
+         echo $FULL_NAME
+         echo $DISPLAY_NAME
          
       #- name: Edit package.json
       #  env:
