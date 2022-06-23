@@ -39,8 +39,9 @@ jobs:
         run: |
          sed -i "s/Package/$PACKAGE_NAME/" Runtime/Organization.Package.asmdef
          sed -i "s/Organization/$ORGANIZATION_NAME/" Runtime/Organization.Package.asmdef
-         sed -i "s/Package/$PACKAGE_NAME/" Editor/Organization.Package.Editor.asmdef
-         sed -i "s/Organization/$ORGANIZATION_NAME/" Editor/Organization.Package.Editor.asmdef
+         
+         sed -i "s/Package/$PACKAGE_NAME/g" Editor/Organization.Package.Editor.asmdef
+         sed -i "s/Organization/$ORGANIZATION_NAME/g" Editor/Organization.Package.Editor.asmdef
          
       - name: Rename Asemdef files
         run: |
