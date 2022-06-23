@@ -25,20 +25,18 @@ jobs:
          echo "ORGANIZATION_NAME=$($OWNER_NAME | tr -d '-')" >> $GITHUB_ENV
          echo "PACKAGE_NAME=$($REPO_NAME | tr -d '-')" >> $GITHUB_ENV
       
-      - name: Set Full Name
-        run: |
-         "FULL_NAME=$(echo com.$ORGANIZATION_NAME.$PACKAGE_NAME | tr '[:upper:]' '[:lower:]'" >> $GITHUB_ENV
-      
-      - name: Set Display Name
-        run: |
-         "DISPLAY_NAME=$(echo $REPO_NAME | tr '-' ' ')" >> $GITHUB_ENV
+      #- name: Set Full Name
+      #  run: |
+      #   "FULL_NAME=$(echo com.$ORGANIZATION_NAME.$PACKAGE_NAME | tr '[:upper:]' '[:lower:]'" >> $GITHUB_ENV
+      #
+      #- name: Set Display Name
+      #  run: |
+      #   "DISPLAY_NAME=$(echo $REPO_NAME | tr '-' ' ')" >> $GITHUB_ENV
       
       - name: Print Envs
         run: |
          echo "${{ env.ORGANIZATION_NAME }}"
          echo "${{ env.PACKAGE_NAME }}"
-         echo "${{ env.FULL_NAME }}"
-         echo "${{ env.DISPLAY_NAME }}"
          
       #- name: Edit package.json
       #  env:
