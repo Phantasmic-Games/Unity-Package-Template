@@ -22,8 +22,8 @@ jobs:
       
       - name: Set Organization and Package Name
         run: |
-         "ORGANIZATION_NAME=$(echo $OWNER_NAME | tr '-' '')" >> $GITHUB_ENV
-         "PACKAGE_NAME=$(echo $REPO_NAME | tr '-' '')" >> $GITHUB_ENV
+         "ORGANIZATION_NAME=$(echo $OWNER_NAME | tr -d '-')" >> $GITHUB_ENV
+         "PACKAGE_NAME=$(echo $REPO_NAME | tr -d '-')" >> $GITHUB_ENV
       
       - name: Set Full Name
         run: |
