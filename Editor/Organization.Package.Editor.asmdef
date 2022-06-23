@@ -1,5 +1,5 @@
 {
-    "name": "Company.Package.Editor",
+    "name": "Organization.Package.Editor",
     "rootNamespace": "",
     "references": [
         "GUID:731f7a63fe16c4979947141b2ef3d74f"
