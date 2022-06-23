@@ -20,12 +20,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Set Package Name Variables
+      - name: Set Package, Organization and Display Name env
         run: |
          echo "ORGANIZATION_NAME=$(echo $OWNER_NAME | tr -d '-')" >> $GITHUB_ENV
          echo "PACKAGE_NAME=$(echo $REPO_NAME | tr -d '-')" >> $GITHUB_ENV
-         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
          echo "DISPLAY_NAME=$(echo $REPO_NAME | tr '-' ' ')" >> $GITHUB_ENV
+      
+      - name: Set Full Name env
+        run: |
+         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       
       #- name: Set Organization and Package Name
       #  run: |
