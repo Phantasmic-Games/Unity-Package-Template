@@ -37,10 +37,17 @@ jobs:
          
       - name: Edit Asemdef files
         run: |
-         sed -i "s/Package/$PACKAGE_NAME/" Editor/Company.Package.Editor.asmdef
-         sed -i "s/Organization/$ORGANIZATION_NAME/" Editor/Company.Package.Editor.asmdef
-         sed -i "s/Package/$PACKAGE_NAME/" Runtime/Company.Package.asmdef
-         sed -i "s/Organization/$ORGANIZATION_NAME/" Runtime/Company.Package.asmdef
+         sed -i "s/Package/$PACKAGE_NAME/" Runtime/Organization.Package.asmdef
+         sed -i "s/Organization/$ORGANIZATION_NAME/" Runtime/Organization.Package.asmdef
+         sed -i "s/Package/$PACKAGE_NAME/" Editor/Organization.Package.Editor.asmdef
+         sed -i "s/Organization/$ORGANIZATION_NAME/" Editor/Organization.Package.Editor.asmdef
+         
+      - name: Rename Asemdef files
+        run: |
+         mv Runtime/Organization.Package.asmdef Runtime/$ORGANIZATION_NAME.PACKAGE_NAME.asmdef
+         mv Runtime/Organization.Package.asmdef.meta Runtime/$ORGANIZATION_NAME.PACKAGE_NAME.asmdef.meta
+         mv Editor/Organization.Package.Editor.asmdef Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
+         mv Editor/Organization.Package.Editor.asmdef.meta Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
          
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
