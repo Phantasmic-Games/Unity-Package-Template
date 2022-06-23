@@ -27,7 +27,7 @@ jobs:
       
       - name: Set Full Name
         run: |
-         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]'" >> $GITHUB_ENV
+         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
       
       - name: Set Display Name
         run: |
