@@ -35,6 +35,13 @@ jobs:
          sed -i "s/com.organization.package/$FULL_NAME/" package.json
          sed -i "s/Package/$DISPLAY_NAME/" package.json
          
+      - name: Edit Asemdef files
+        run: |
+         sed -i "s/Package/$PACKAGE_NAME/" Editor/Company.Package.Editor.asmdef
+         sed -i "s/Organization/$ORGANIZATION_NAME/" Editor/Company.Package.Editor.asmdef
+         sed -i "s/Package/$PACKAGE_NAME/" Runtime/Company.Package.asmdef
+         sed -i "s/Organization/$ORGANIZATION_NAME/" Runtime/Company.Package.asmdef
+         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
