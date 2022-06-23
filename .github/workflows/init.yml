@@ -28,38 +28,14 @@ jobs:
       
       - name: Set Full Name env
         run: |
-         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      
-      #- name: Set Organization and Package Name
-      #  run: |
-      #   echo "ORGANIZATION_NAME=$(echo $OWNER_NAME | tr -d '-')" >> $GITHUB_ENV
-      #   echo "PACKAGE_NAME=$(echo $REPO_NAME | tr -d '-')" >> $GITHUB_ENV
-      
-      #- name: Set Full Name
-      #  run: |
-      #   echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
-      
-      #- name: Set Display Name
-      #  run: |
-      #   echo "DISPLAY_NAME=$(echo $REPO_NAME | tr '-' ' ')" >> $GITHUB_ENV
-      
-      - name: Print Envs
+         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV      
+         
+      - name: Edit package.json
         run: |
-         echo $ORGANIZATION_NAME
-         echo $PACKAGE_NAME
-         echo $FULL_NAME
-         echo $DISPLAY_NAME
+         sed -i "s/com.organization.package/$FULL_NAME/" package.json
+         sed -i "s/Package/$DISPLAY_NAME/" package.json
          
-      #- name: Edit package.json
-      #  env:
-      #   OWNER_NAME : ${{ github.repository_owner }}
-      #   PACKAGE_NAME : ${{ github.event.repository.name }}
-      #   NAME : com.${ORGANIZATION_NAME}.${PACKAGE_NAME} | tr '[:upper:]' '[:lower:]'
-      #  run: |
-      #   sed -i "s/com.organization.package/$NAME/" package.json
-      #   sed -i "s/Package/$DISPLAY_NAME/" package.json
-         
-      #- name: Add & Commit
-      #  uses: EndBug/add-and-commit@v9
-      #  with:
-      #    default_author: github_actions
+      - name: Add & Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          default_author: github_actions
