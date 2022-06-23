@@ -44,10 +44,11 @@ jobs:
          
       - name: Rename Asemdef files
         run: |
-         mv Runtime/Organization.Package.asmdef Runtime/$ORGANIZATION_NAME.PACKAGE_NAME.asmdef
-         mv Runtime/Organization.Package.asmdef.meta Runtime/$ORGANIZATION_NAME.PACKAGE_NAME.asmdef.meta
-         mv Editor/Organization.Package.Editor.asmdef Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
-         mv Editor/Organization.Package.Editor.asmdef.meta Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
+         mv Runtime/Organization.Package.asmdef Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.asmdef
+         mv Runtime/Organization.Package.asmdef.meta Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.asmdef.meta
+         
+         mv Editor/Organization.Package.Editor.asmdef Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
+         mv Editor/Organization.Package.Editor.asmdef.meta Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
          
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
