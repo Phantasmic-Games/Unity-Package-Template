@@ -50,6 +50,9 @@ jobs:
          mv Editor/Organization.Package.Editor.asmdef Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
          mv Editor/Organization.Package.Editor.asmdef.meta Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
          
+      - name: Delete Workflows Directory
+        run: rm .github/workflows
+        
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
