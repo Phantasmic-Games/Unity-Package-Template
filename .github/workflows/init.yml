@@ -50,6 +50,9 @@ jobs:
          mv Editor/Organization.Package.Editor.asmdef Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
          mv Editor/Organization.Package.Editor.asmdef.meta Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
          
+      - name: Clear Readme
+        run: $DISPLAY_NAME > README.md
+         
       - name: Delete Workflows Directory
         run: rm -rf .github/workflows
         
