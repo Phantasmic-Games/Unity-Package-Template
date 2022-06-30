@@ -19,9 +19,6 @@ sed -i '' "s/com.organization.package/${FULL_NAME}/" package.json
 sed -i '' "s/Package/${PACKAGE_DISPLAY_NAME}/" package.json
 
 #Edit Asemdef files
-#sed -i '' "s/Package/${PACKAGE_NAME}/g" *.asmdef
-#sed -i '' "s/Organization/${ORGANIZATION_NAME}/" *.asmdef
-
 sed -i '' "s/Package/${PACKAGE_NAME}/" Runtime/Organization.Package.asmdef
 sed -i '' "s/Organization/${ORGANIZATION_NAME}/" Runtime/Organization.Package.asmdef
 
@@ -33,3 +30,9 @@ mv Runtime/Organization.Package.asmdef.meta Runtime/${ORGANIZATION_NAME}.${PACKA
          
 mv Editor/Organization.Package.Editor.asmdef Editor/${ORGANIZATION_NAME}.${PACKAGE_NAME}.Editor.asmdef
 mv Editor/Organization.Package.Editor.asmdef.meta Editor/${ORGANIZATION_NAME}.${PACKAGE_NAME}.Editor.asmdef.meta
+
+#Clear README
+echo "# ${PACKAGE_DISPLAY_NAME}" > README.md
+
+#Delete .github
+rm -rf .github
