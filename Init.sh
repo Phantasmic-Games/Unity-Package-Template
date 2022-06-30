@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Ask for Organization and Package names if they weren't provided
 if [ $# -eq 0 ]
     then
      read -p  'Organization Name:' ORGANIZATION_NAME
@@ -14,25 +15,19 @@ fi
 PACKAGE_NAME=${PACKAGE_DISPLAY_NAME//[^[:alnum:]]/}
 FULL_NAME=$(echo "com.${ORGANIZATION_NAME}.${PACKAGE_NAME}" | tr '[:upper:]' '[:lower:]')
 
-# Edit package.json
+# Edit package.json.
 sed -i '' "s/com.organization.package/${FULL_NAME}/" package.json
 sed -i '' "s/Package/${PACKAGE_DISPLAY_NAME}/" package.json
 
-#Edit Asemdef files
-sed -i '' "s/Package/${PACKAGE_NAME}/" Runtime/Organization.Package.asmdef
-sed -i '' "s/Organization/${ORGANIZATION_NAME}/" Runtime/Organization.Package.asmdef
+# Assign Organization and Pacakge names in asmdef files.
+find . -name "*.asmdef" -exec sed -i '' "s/Package/${PACKAGE_NAME}/g" {} \;
+find . -name "*.asmdef" -exec sed -i '' "s/Organization/${ORGANIZATION_NAME}/g" {} \;
 
-sed -i '' "s/Package/${PACKAGE_NAME}/g" Editor/Organization.Package.Editor.asmdef
-sed -i '' "s/Organization/${ORGANIZATION_NAME}/g" Editor/Organization.Package.Editor.asmdef
-
-mv Runtime/Organization.Package.asmdef Runtime/${ORGANIZATION_NAME}.${PACKAGE_NAME}.asmdef
-mv Runtime/Organization.Package.asmdef.meta Runtime/${ORGANIZATION_NAME}.${PACKAGE_NAME}.asmdef.meta
-         
-mv Editor/Organization.Package.Editor.asmdef Editor/${ORGANIZATION_NAME}.${PACKAGE_NAME}.Editor.asmdef
-mv Editor/Organization.Package.Editor.asmdef.meta Editor/${ORGANIZATION_NAME}.${PACKAGE_NAME}.Editor.asmdef.meta
+# Rename assembly definition files and their .meta files
+for f in */*.asmdef* ; do mv $f $(echo "${f/Organization.Package/${ORGANIZATION_NAME}.${PACKAGE_NAME}}") ; done;
 
 #Clear README
 echo "# ${PACKAGE_DISPLAY_NAME}" > README.md
 
-#Delete .github
+#Delete .github folder
 rm -rf .github
