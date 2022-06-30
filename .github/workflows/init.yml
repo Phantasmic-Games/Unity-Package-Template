@@ -20,46 +20,12 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Set Package, Organization and Display Name env
-        run: |
-         echo "ORGANIZATION_NAME=$(echo $OWNER_NAME | tr -d '-')" >> $GITHUB_ENV
-         echo "PACKAGE_NAME=$(echo $REPO_NAME | tr -d '-')" >> $GITHUB_ENV
-         echo "DISPLAY_NAME=$(echo $REPO_NAME | tr '-' ' ')" >> $GITHUB_ENV
-      
-      - name: Set Full Name env
-        run: |
-         echo "FULL_NAME=$(echo "com.$ORGANIZATION_NAME.$PACKAGE_NAME" | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV      
-         
-      - name: Edit package.json
-        run: |
-         sed -i "s/com.organization.package/$FULL_NAME/" package.json
-         sed -i "s/Package/$DISPLAY_NAME/" package.json
-         
-      - name: Edit Asemdef files
-        run: |
-         sed -i "s/Package/$PACKAGE_NAME/" Runtime/Organization.Package.asmdef
-         sed -i "s/Organization/$ORGANIZATION_NAME/" Runtime/Organization.Package.asmdef
-         
-         sed -i "s/Package/$PACKAGE_NAME/g" Editor/Organization.Package.Editor.asmdef
-         sed -i "s/Organization/$ORGANIZATION_NAME/g" Editor/Organization.Package.Editor.asmdef
-         
-      - name: Rename Asemdef files
-        run: |
-         mv Runtime/Organization.Package.asmdef Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.asmdef
-         mv Runtime/Organization.Package.asmdef.meta Runtime/$ORGANIZATION_NAME.$PACKAGE_NAME.asmdef.meta
-         
-         mv Editor/Organization.Package.Editor.asmdef Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef
-         mv Editor/Organization.Package.Editor.asmdef.meta Editor/$ORGANIZATION_NAME.$PACKAGE_NAME.Editor.asmdef.meta
-         
-      - name: Clear Readme
-        run: echo "# $DISPLAY_NAME" > README.md
-         
-      - name: Delete Workflows Directory
-        run: rm -rf .github/workflows
+      - name: Run Init.sh script
+        run: sh ./Init.sh "${OWNER_NAME}" "${REPO_NAME}"
         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
         with:
-         message: Initializing Package
+         message: Initialized Package
          committer_name: GitHub Actions
          committer_email: 41898282+github-actions[bot]@users.noreply.github.com
