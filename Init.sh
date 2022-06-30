@@ -31,3 +31,6 @@ echo "# ${PACKAGE_DISPLAY_NAME}" > README.md
 
 #Delete .github folder
 rm -rf .github
+
+#Deletes itself
+rm -- "$0"
