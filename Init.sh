@@ -4,14 +4,14 @@
 if [ $# -eq 0 ]
     then
      read -p  'Organization Name:' ORGANIZATION_NAME
-     ORGANIZATION_NAME=${ORGANIZATION_NAME//[^[:alnum:]]/}
-
      read -p 'Package Name:' PACKAGE_DISPLAY_NAME
     else
+     echo "Skipped read"
      ORGANIZATION_NAME=$1
      PACKAGE_DISPLAY_NAME=$2
 fi
 
+ORGANIZATION_NAME=${ORGANIZATION_NAME//[^[:alnum:]]/}
 PACKAGE_NAME=${PACKAGE_DISPLAY_NAME//[^[:alnum:]]/}
 FULL_NAME=$(echo "com.${ORGANIZATION_NAME}.${PACKAGE_NAME}" | tr '[:upper:]' '[:lower:]')
 
