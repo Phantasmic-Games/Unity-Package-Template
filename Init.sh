@@ -34,5 +34,7 @@ rm -rf .github
 # Delete generated .bak files
 find . -name "*.bak" -type f -delete
 
+echo "Package is Initialized"
+
 #Deletes itself
 rm -- "$0"
