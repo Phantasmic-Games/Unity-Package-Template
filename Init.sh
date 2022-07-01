@@ -26,11 +26,14 @@ find . -name "*.asmdef" -exec sed -i.bak "s/Organization/${ORGANIZATION_NAME}/g"
 # Rename assembly definition files and their .meta files
 for f in */*.asmdef* ; do mv $f $(echo "${f/Organization.Package/${ORGANIZATION_NAME}.${PACKAGE_NAME}}") ; done;
 
-#Clear README
+# Clear README
 echo "# ${PACKAGE_DISPLAY_NAME}" > README.md
 
-#Delete .github folder
+# Delete .github folder
 rm -rf .github
+
+# Delete generated .bak files
+find . -name "*.bak" -type f -delete
 
 #Deletes itself
 rm -- "$0"
