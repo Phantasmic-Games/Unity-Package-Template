@@ -14,4 +14,4 @@ Go to `Code - Download ZIP` and extract it in your Unity project's Packages dire
 ```
 bash Init.sh
 ```
-Enter the Organization and Package names and the script will initialize the package and delete unnecessary files (.github folder) just as the GitHub workflow.
+Enter the Organization and Package names and the script will initialize the package and delete unnecessary files (.github folder) just like the GitHub workflow.
