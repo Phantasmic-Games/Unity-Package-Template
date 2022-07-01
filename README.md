@@ -3,7 +3,7 @@ Rapidly set up a [Custom Unity Package](https://docs.unity3d.com/Manual/CustomPa
 
 ## How to Use
 ### 'Use this Template' Method
-This is the most streamlined and the quickest method. Clicking `Use this template` will initiate the Initialize workflow after you package's repo is generated from the template. Once done, there will be a new commit with the package configured as follows: The package's Organization will be the repo owner's name, the Package name will be the repo's name and the README.md will be cleared.
+This is the most streamlined and the quickest method. Clicking `Use this template` will trigger the Initialize workflow after you package's repo is generated from the template. Once done, there will be a new commit with the package configured as follows: The package's Organization will be the repo owner's name, the Package name will be the repo's name and the README.md will be cleared.
 
 #### Note:
 * If the workflow is not triggered go to `Actions - Initialize - Run workflow` and click `Run workflow`.
