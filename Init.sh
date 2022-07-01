@@ -7,7 +7,7 @@ if [ $# -eq 0 ]
      read -p 'Package Name:' PACKAGE_DISPLAY_NAME
     else
      ORGANIZATION_NAME=$1
-     PACKAGE_DISPLAY_NAME=$2
+     PACKAGE_DISPLAY_NAME=$(echo $2 | tr '-' ' ')
 fi
 
 ORGANIZATION_NAME=${ORGANIZATION_NAME//[^[:alnum:]]/}
