@@ -6,7 +6,6 @@ if [ $# -eq 0 ]
      read -p  'Organization Name:' ORGANIZATION_NAME
      read -p 'Package Name:' PACKAGE_DISPLAY_NAME
     else
-     echo "Skipped read"
      ORGANIZATION_NAME=$1
      PACKAGE_DISPLAY_NAME=$2
 fi
