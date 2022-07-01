@@ -16,12 +16,12 @@ PACKAGE_NAME=${PACKAGE_DISPLAY_NAME//[^[:alnum:]]/}
 FULL_NAME=$(echo "com.${ORGANIZATION_NAME}.${PACKAGE_NAME}" | tr '[:upper:]' '[:lower:]')
 
 # Edit package.json.
-sed -i '' "s/com.organization.package/${FULL_NAME}/" package.json
-sed -i '' "s/Package/${PACKAGE_DISPLAY_NAME}/" package.json
+sed -i.bak "s/com.organization.package/${FULL_NAME}/" package.json
+sed -i.bak "s/Package/${PACKAGE_DISPLAY_NAME}/" package.json
 
 # Assign Organization and Pacakge names in asmdef files.
-find . -name "*.asmdef" -exec sed -i '' "s/Package/${PACKAGE_NAME}/g" {} \;
-find . -name "*.asmdef" -exec sed -i '' "s/Organization/${ORGANIZATION_NAME}/g" {} \;
+find . -name "*.asmdef" -exec sed -i.bak "s/Package/${PACKAGE_NAME}/g" {} \;
+find . -name "*.asmdef" -exec sed -i.bak "s/Organization/${ORGANIZATION_NAME}/g" {} \;
 
 # Rename assembly definition files and their .meta files
 for f in */*.asmdef* ; do mv $f $(echo "${f/Organization.Package/${ORGANIZATION_NAME}.${PACKAGE_NAME}}") ; done;
