@@ -1,5 +1,8 @@
 # Unity Package Template
+
 Rapidly set up a [Custom Unity Package](https://docs.unity3d.com/Manual/CustomPackages.html) with this template!
+
+![](https://github.com/Phantasmic-Games/Unity-Package-Template/blob/main/.github/workflows/Using%20Template.gif)
 
 ## How to Use
 ### 'Use this Template' Method
