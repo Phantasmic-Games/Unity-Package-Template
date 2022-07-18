@@ -3,6 +3,13 @@ name: Initialize
 # Controls when the workflow will run
 on:
     workflow_dispatch:
+        inputs:
+            companyName:
+                description: "Company Name"
+                required: true
+            packageName:
+                description: "Package Name"
+                required: true
 jobs:
   Init:
     # The type of runner that the job will run on
@@ -19,7 +26,7 @@ jobs:
          OWNER_NAME: ${{ github.repository_owner }}
         run: |
          chmod +x ./Init.sh
-         ./Init.sh "${OWNER_NAME}" "${REPO_NAME}"
+         ./Init.sh "${inputs.companyName}" "${inputs.packageName}"
         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
