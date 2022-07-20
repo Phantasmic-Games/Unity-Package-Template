@@ -32,6 +32,7 @@ jobs:
             then
                 if [ -n "${{ github.event.inputs.organizationName }}" && -n "${{ github.event.inputs.packageName }}" ]
                 then
+                    echo "Re-assigning names"
                     $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
                     $PACKAGE_NAME=${{ github.event.inputs.packageName }}
                 fi
