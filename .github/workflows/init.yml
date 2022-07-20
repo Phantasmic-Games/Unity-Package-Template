@@ -35,7 +35,11 @@ jobs:
                     echo "Re-assigning names"
                     $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
                     $PACKAGE_NAME=${{ github.event.inputs.packageName }}
+                else
+                    echo "Inputs are not empty"
                 fi
+            else
+                echo "Not a dispatch workflow"
             fi
         
             chmod +x ./Init.sh
