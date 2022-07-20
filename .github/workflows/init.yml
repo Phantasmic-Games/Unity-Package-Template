@@ -6,7 +6,7 @@ on:
     workflow_dispatch:
         inputs:
             organizationName:
-                description: "Company Name"
+                description: "Organization Name"
             packageName:
                 description: "Package Name"
 jobs:
@@ -17,10 +17,6 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     
-    env:
-        ORGANIZATION_NAME: ${{ github.repository_owner }}
-        PACKAGE_NAME: ${{ github.event.repository.name }}
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -28,19 +24,23 @@ jobs:
       
       - name: Gather Info
         run: |
+            
+            echo "{organization_name}=${{ github.repository_owner }} >> $GITHUB_ENV
+            echo "{package_name}=${{ github.event.repository.name }} >> $GITHUB_ENV
+        
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
             then
                 if [ -n "${{ github.event.inputs.organizationName }}" && -z "${{ github.event.inputs.packageName }}" ]
                 then
-                    $ORGANIZATION_NAME="${{ github.event.inputs.organizationName }}"
-                    $PACKAGE_NAME="${{ github.event.inputs.packageName }}"
+                    echo "{organization_name}=${{ github.event.inputs.organizationName }} >> $GITHUB_ENV
+                    echo "{package_name}=${{ github.event.inputs.packageName }} >> $GITHUB_ENV
                 fi
             fi
       
       - name: Run Init.sh script
         run: |
          chmod +x ./Init.sh
-         ./Init.sh "${ORGANIZATION_NAME}" "${PACKAGE_NAME}"
+         ./Init.sh "${{ env.organization_name }}" "${{ env.package_name }}"
         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
