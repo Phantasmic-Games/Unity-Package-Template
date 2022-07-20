@@ -30,13 +30,13 @@ jobs:
             
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
             then
-                if [ -n "${{ github.event.inputs.organizationName }}" && -n "${{ github.event.inputs.packageName }}" ]
+                if [ -n "${{ github.event.inputs.organizationName }}" && -n "${{ github.event.inputs.packageName }}" ];
                 then
                     echo "Re-assigning names"
                     $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
                     $PACKAGE_NAME=${{ github.event.inputs.packageName }}
                 else
-                    echo "Inputs are not empty"
+                    echo "Inputs are empty"
                 fi
             else
                 echo "Not a dispatch workflow"
