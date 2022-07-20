@@ -33,8 +33,8 @@ jobs:
                 if [[ ! -z "${{ github.event.inputs.organizationName }}" && ! -z "${{ github.event.inputs.packageName }}" ]];
                 then
                     echo "Re-assigning names"
-                    $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
-                    $PACKAGE_NAME=${{ github.event.inputs.packageName }}
+                    ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
+                    PACKAGE_NAME=${{ github.event.inputs.packageName }}
                 else
                     echo "Inputs are empty"
                 fi
