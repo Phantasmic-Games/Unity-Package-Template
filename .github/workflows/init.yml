@@ -22,25 +22,22 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
-      - name: Gather Info
+      - name: Run Init.sh script
+        env:
+            ORGANIZATION_NAME: github.repository_owner
+            PACKAGE_NAME: github.event.repository.name
         run: |
-            
-            echo "organization_name=${{ github.repository_owner }}" >> $GITHUB_ENV
-            echo "package_name=${{ github.event.repository.name }}" >> $GITHUB_ENV
-        
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
             then
                 if [ -n "${{ github.event.inputs.organizationName }}" && -n "${{ github.event.inputs.packageName }}" ]
                 then
-                    echo "organization_name=${{ github.event.inputs.organizationName }}" >> $GITHUB_ENV
-                    echo "package_name=${{ github.event.inputs.packageName }}" >> $GITHUB_ENV
+                    $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
+                    $PACKAGE_NAME=${{ github.event.inputs.packageName }}
                 fi
             fi
-      
-      - name: Run Init.sh script
-        run: |
-         chmod +x ./Init.sh
-         ./Init.sh "${{ env.organization_name }}" "${{ env.package_name }}"
+        
+            chmod +x ./Init.sh
+            ./Init.sh "$ORGANIZATION_NAME" "$PACKAGE_NAME"
         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
