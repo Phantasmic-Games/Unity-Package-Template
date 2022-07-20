@@ -30,7 +30,7 @@ jobs:
             
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
             then
-                if [ ! -z "${{ github.event.inputs.organizationName }}" && ! -z "${{ github.event.inputs.packageName }}" ];
+                if [[ ! -z "${{ github.event.inputs.organizationName }}" && ! -z "${{ github.event.inputs.packageName }}" ]];
                 then
                     echo "Re-assigning names"
                     $ORGANIZATION_NAME=${{ github.event.inputs.organizationName }}
