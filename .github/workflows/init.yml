@@ -2,31 +2,45 @@ name: Initialize
 
 # Controls when the workflow will run
 on:
+    create:
     workflow_dispatch:
         inputs:
-            companyName:
+            organizationName:
                 description: "Company Name"
-                required: true
             packageName:
                 description: "Package Name"
-                required: true
 jobs:
   Init:
+    # Run job if workflow was manually triggered or if repo was created in an Organization
+    if: github.event_name == 'workflow_dispatch' || github.repository_owner != github.actor
+    
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    
+    env:
+        ORGANIZATION_NAME: ${{ github.repository_owner }}
+        PACKAGE_NAME: ${{ github.event.repository.name }}
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       
+      - name: Gather Info
+        run: |
+            if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
+            then
+                if [ -n "${{ github.event.inputs.organizationName }}" && -z "${{ github.event.inputs.packageName }}" ]
+                then
+                    $ORGANIZATION_NAME="${{ github.event.inputs.organizationName }}"
+                    $PACKAGE_NAME="${{ github.event.inputs.packageName }}"
+                fi
+            fi
+      
       - name: Run Init.sh script
-        env:
-         REPO_NAME: ${{ github.event.repository.name }}
-         OWNER_NAME: ${{ github.repository_owner }}
         run: |
          chmod +x ./Init.sh
-         ./Init.sh "${{ github.event.inputs.companyName }}" "${{ github.event.inputs.packageName }}"
+         ./Init.sh "${ORGANIZATION_NAME}" "${PACKAGE_NAME}"
         
       - name: Add & Commit
         uses: EndBug/add-and-commit@v9
