@@ -25,15 +25,15 @@ jobs:
       - name: Gather Info
         run: |
             
-            echo "{organization_name}=${{ github.repository_owner }} >> $GITHUB_ENV
-            echo "{package_name}=${{ github.event.repository.name }} >> $GITHUB_ENV
+            echo "{organization_name}=${{ github.repository_owner }}" >> $GITHUB_ENV
+            echo "{package_name}=${{ github.event.repository.name }}" >> $GITHUB_ENV
         
             if [ "${{ github.event_name }}" = "workflow_dispatch" ]; 
             then
-                if [ -n "${{ github.event.inputs.organizationName }}" && -z "${{ github.event.inputs.packageName }}" ]
+                if [ -n "${{ github.event.inputs.organizationName }}" && -n "${{ github.event.inputs.packageName }}" ]
                 then
-                    echo "{organization_name}=${{ github.event.inputs.organizationName }} >> $GITHUB_ENV
-                    echo "{package_name}=${{ github.event.inputs.packageName }} >> $GITHUB_ENV
+                    echo "{organization_name}=${{ github.event.inputs.organizationName }}" >> $GITHUB_ENV
+                    echo "{package_name}=${{ github.event.inputs.packageName }}" >> $GITHUB_ENV
                 fi
             fi
       
