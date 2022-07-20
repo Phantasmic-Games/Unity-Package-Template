@@ -1,0 +1,12 @@
+name: Initialize For Organization
+
+on:
+  workflow_dispatch:
+  
+  jobs:
+    Test:
+      runs-on: ubuntu-latest
+      
+      steps:
+        - name: Test
+          run: echo ${{ github.event_name }}
