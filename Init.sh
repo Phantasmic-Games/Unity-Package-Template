@@ -25,6 +25,39 @@ find . -name "*.asmdef" -exec sed -i.bak "s/Organization/${ORGANIZATION_NAME}/g"
 # Rename assembly definition files and their .meta files
 for f in */*.asmdef* ; do mv $f $(echo "${f/Organization.Package/${ORGANIZATION_NAME}.${PACKAGE_NAME}}") ; done;
 
+# Based off of https://gist.github.com/markusfisch/6110640
+function guid()
+{
+	local N B C='89ab'
+
+	for (( N=0; N < 16; ++N ))
+	do
+		B=$(( $RANDOM%256 ))
+
+		case $N in
+			6)
+				printf '4%x' $(( B%16 ))
+				;;
+			8)
+				printf '%c%x' ${C:$RANDOM%${#C}:1} $(( B%16 ))
+				;;
+			3 | 5 | 7 | 9)
+				printf '%02x' $B
+				;;
+			*)
+				printf '%02x' $B
+				;;
+		esac
+	done
+
+	echo
+}
+
+# Give all meta files new GUIDs
+for f in *.meta */*.meta ; do
+    sed -i.bak -e "2s/.*/guid: $(guid)/" $f
+done
+
 # Clear README
 echo "# ${PACKAGE_DISPLAY_NAME}" > README.md
 
